@@ -1,0 +1,62 @@
+{
+  "name": "space",
+  "version": "0.9.6",
+  "main": "app.js",
+  "description": "Space Hotel - Maak nieuwe vrienden, doe mee & val op!",
+  "author": "Space Studio",
+  "scripts": {
+    "start": "electron .",
+    "publish": "electron-builder --win -p always",
+    "build": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "11.1.0",
+    "electron-builder": "22.9.1"
+  },
+  "dependencies": {
+    "electron-updater": "4.3.5"
+  },
+  "build": {
+    "appId": "Space",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "SpacehotelNL",
+        "repo": "space-hotel-app-production"
+      }
+    ],
+    "extraResources": [
+      "./flash/**"
+    ],
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "nsis": {
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "uninstallDisplayName": "Space",
+      "oneClick": true,
+      "perMachine": false,
+      "artifactName": "Space-${version}.${ext}"
+    },
+    "mac": {
+      "category": "your.app.category.type",
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
+  }
+}
