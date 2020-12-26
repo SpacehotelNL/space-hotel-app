@@ -40,7 +40,7 @@ let sendWindow = (identifier, message) => {
 };
 let createWindow = async () => {
     mainWindow = new BrowserWindow({
-        title: "HabboCity",
+        title: "Space Hotel",
         icon: path.join(__dirname, '/icon.ico'),
         webPreferences: {
             plugins: true,

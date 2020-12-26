@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "publish": "electron-builder --win -p always",
-    "build": "electron-builder --linux"
+    "build": "electron-builder --win"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
