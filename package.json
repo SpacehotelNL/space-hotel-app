@@ -1,6 +1,6 @@
 {
   "name": "space",
-  "version": "0.9.8",
+  "version": "0.10.0",
   "main": "app.js",
   "description": "Space Hotel - Maak vrienden, doe mee & val op!",
   "author": "Space Studio",
@@ -31,7 +31,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "SpacehotelNL",
+        "owner": "spacehotelnl",
         "repo": "space-hotel-app"
       }
     ],
