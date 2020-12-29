@@ -56,7 +56,7 @@ let createWindow = async () => {
     mainWindow.show();
     mainWindow.setMenu(null);
 
-   // await mainWindow.loadURL("https://habbocity.me");
+   // await mainWindow.loadURL("https://spacehotel.co");
     await mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, `app.html`),
         protocol: 'file:',
