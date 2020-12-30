@@ -1,0 +1,76 @@
+{
+  "name": "space",
+  "version": "1.0.1",
+  "main": "app.js",
+  "description": "Space Hotel: Maak vrienden, doe mee en val op!",
+  "author": "Space Studio",
+  "scripts": {
+    "start": "electron .",
+    "publish": "electron-builder --win -p always",
+    "build": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "11.1.0",
+    "electron-builder": "22.9.1"
+  },
+  "dependencies": {
+    "electron-updater": "4.3.5"
+  },
+  "build": {
+    "appId": "nl.space.app",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "spacehotelnl",
+        "repo": "space-hotel-app"
+      }
+    ],
+    "extraResources": [
+      "./flash/**"
+    ],
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "nsis": {
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "uninstallDisplayName": "Space",
+      "oneClick": true,
+      "perMachine": false,
+      "artifactName": "Space-${version}.${ext}"
+    },
+    "mac": {
+      "category": "your.app.category.type",
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "ia32",
+            "armv7l",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "Network;Chat"
+    }
+  }
+}
