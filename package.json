@@ -1,13 +1,17 @@
 {
-  "name": "space",
+  "name": "Space",
   "version": "1.0.2",
   "main": "app.js",
   "description": "Space Hotel: Maak vrienden, doe mee en val op!",
-  "author": "Space Studio",
+  "homepage": "https://spacehotel.co",
+  "author": {
+    "name": "Space Studio",
+    "email": "support@spacehotel.be"
+  },
   "scripts": {
     "start": "electron .",
     "publish": "electron-builder --win -p always",
-    "build": "electron-builder --linux"
+    "build": "electron-builder --win"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
@@ -83,9 +87,17 @@
     },
     "linux": {
       "target": [
-        "AppImage",
-        "deb"
-      ]
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "ia32",
+            "armv7l",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "Network;Chat"
     }
   }
 }
