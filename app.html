@@ -10,7 +10,7 @@
 <body>
 <div id="alert" class="alert">
     <div class="box">
-        <div class="title">Opgelet...</div>
+        <div class="title">Weet je het zeker?</div>
         <div id="description" class="description">Om je cache te legen, zal de app opnieuw moeten worden opgestart.</div>
         <div class="btns">
             <div id="cancel" class="button" style="float:left;background: #ed1c24;">
@@ -41,6 +41,9 @@
 </div>
 <iframe id="frame" width="100%" src="https://spacehotel.co/index?app=true"></iframe>
 <div class="buttons">
+    <div id="close">
+        <div id="close-button" style="transform: scaleX(-1);"></div>
+    </div>
     <div id="screen" class="button">
         <div class="icon screen"></div>
         <div class="tooltip">
@@ -88,24 +91,35 @@
     });
 
     ipcRenderer.on("checking-for-update", (event, data) => {
-        progression.innerHTML = "Bijwerken...";
+        progression.innerHTML = "Checken naar update...";
         updater.style.display = "block";
     });
 
     ipcRenderer.on("update-not-available", (event, data) => {
         updater.style.display = "none";
-        updater.innerHTML = "";
+        updater.innerHTML = "Update niet beschikbaar! Download de app opnieuw indien hij niet laadt!";
     });
 
     ipcRenderer.on("download-progress", (event, data) => {
-        progression.innerHTML = Math.round(data['percent']) + "%";
+        progression.innerHTML = "Installeren... "+ Math.round(data['percent']) + "%";
     });
 
 
     const zoomIn = document.getElementById("zoomIn");
     const zoomOut = document.getElementById("zoomOut");
     const screen = document.getElementById("screen");
+    const iframe = document.getElementById("frame").contentWindow;
     const reload = document.getElementById("reload");
+    const close = document.getElementById("close");
+    let isOpenButtons = true;
+    
+    function enterFacebook() {
+		ipcRenderer.send("facebook", "");
+	}
+    
+    function redirectFacebook() {
+		homeFrame.src = package.homepage + "/facebook";
+	}
 
     zoomIn.addEventListener('click', () => {
         ipcRenderer.send("zoomIn", "");
@@ -118,6 +132,32 @@
     });
     reload.addEventListener('click', () => {
         document.getElementById("frame").contentWindow.location.reload();
+    });
+    
+    reload.addEventListener('click', () => {
+	document.getElementById("reload").classList.add("fa-spin");
+		setTimeout(() => {
+			document.getElementById("reload").classList.remove("fa-spin");
+		}, 1800);
+		const activeFrame = document.querySelector('[tabindex = "0"]');
+       	 activeFrame.src = activeFrame.src;
+	});
+
+	webReload.addEventListener('click', () => {
+		const activeFrame = document.querySelector('[tabindex = "0"]');
+       	 activeFrame.src = activeFrame.src;
+	});
+    
+    close.addEventListener('click', () => {
+        if (!isOpenButtons) {
+            isOpenButtons = true;
+            document.querySelector('.buttons').style.width = "50px";
+            document.getElementById('close-button').style.transform = "scaleX(-1)";
+        } else {
+            isOpenButtons = false;
+            document.querySelector('.buttons').style.width = "0px";
+            document.getElementById('close-button').style.transform = "none";
+        }
     });
 
     const alert = document.getElementById("alert");
