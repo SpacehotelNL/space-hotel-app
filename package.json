@@ -1,6 +1,10 @@
 {
   "name": "Space",
+<<<<<<< HEAD
   "version": "1.0.3",
+=======
+  "version": "1.0.2",
+>>>>>>> b084d3dab9112c0d7f788aa8e56b6a387831137a
   "main": "app.js",
   "url": "https://spacehotel.co",
   "description": "Space Hotel: Maak vrienden, doe mee en val op!",
@@ -11,8 +15,13 @@
   },
   "scripts": {
     "start": "electron .",
+<<<<<<< HEAD
     "publish": "electron-builder --macos -p always",
     "build": "electron-builder --mac"
+=======
+    "publish": "electron-builder --win -p always",
+    "build": "electron-builder --win"
+>>>>>>> b084d3dab9112c0d7f788aa8e56b6a387831137a
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

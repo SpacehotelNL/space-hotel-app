@@ -11,8 +11,12 @@
 <div id="alert" class="alert">
     <div class="box">
         <div class="title">Weet je het zeker?</div>
+<<<<<<< HEAD
         <div id="description" class="description">Om je cache te legen, zal de app opnieuw moeten worden opgestart.
         </div>
+=======
+        <div id="description" class="description">Om je cache te legen, zal de app opnieuw moeten worden opgestart.</div>
+>>>>>>> b084d3dab9112c0d7f788aa8e56b6a387831137a
         <div class="btns">
             <div id="cancel" class="button" style="float:left;background: #ed1c24;">
                 <div class="alpha"></div>
@@ -96,7 +100,11 @@
     });
 
     ipcRenderer.on("checking-for-update", (event, data) => {
+<<<<<<< HEAD
         progression.innerHTML = "Laden...";
+=======
+        progression.innerHTML = "Checken naar update...";
+>>>>>>> b084d3dab9112c0d7f788aa8e56b6a387831137a
         updater.style.display = "block";
     });
 
@@ -106,7 +114,11 @@
     });
 
     ipcRenderer.on("download-progress", (event, data) => {
+<<<<<<< HEAD
         progression.innerHTML = "Installeren... " + Math.round(data['percent']) + "%";
+=======
+        progression.innerHTML = "Installeren... "+ Math.round(data['percent']) + "%";
+>>>>>>> b084d3dab9112c0d7f788aa8e56b6a387831137a
     });
 
 
@@ -114,6 +126,7 @@
     const zoomOut = document.getElementById("zoomOut");
     const screen = document.getElementById("screen");
     const iframe = document.getElementById("frame").contentWindow;
+<<<<<<< HEAD
     let hotelFrame = document.getElementById("hotel-frame");
     const reload = document.getElementById("reload");
     const close = document.getElementById("close");
@@ -127,6 +140,19 @@
     function redirectFacebook() {
         iframe.src = "https://spacehotel.co/auth";
     }
+=======
+    const reload = document.getElementById("reload");
+    const close = document.getElementById("close");
+    let isOpenButtons = true;
+    
+    function enterFacebook() {
+		ipcRenderer.send("facebook", "");
+	}
+    
+    function redirectFacebook() {
+		homeFrame.src = package.homepage + "/facebook";
+	}
+>>>>>>> b084d3dab9112c0d7f788aa8e56b6a387831137a
 
     zoomIn.addEventListener('click', () => {
         ipcRenderer.send("zoomIn", "");
@@ -139,6 +165,32 @@
     });
     reload.addEventListener('click', () => {
         document.getElementById("frame").contentWindow.location.reload();
+    });
+    
+    reload.addEventListener('click', () => {
+	document.getElementById("reload").classList.add("fa-spin");
+		setTimeout(() => {
+			document.getElementById("reload").classList.remove("fa-spin");
+		}, 1800);
+		const activeFrame = document.querySelector('[tabindex = "0"]');
+       	 activeFrame.src = activeFrame.src;
+	});
+
+	webReload.addEventListener('click', () => {
+		const activeFrame = document.querySelector('[tabindex = "0"]');
+       	 activeFrame.src = activeFrame.src;
+	});
+    
+    close.addEventListener('click', () => {
+        if (!isOpenButtons) {
+            isOpenButtons = true;
+            document.querySelector('.buttons').style.width = "50px";
+            document.getElementById('close-button').style.transform = "scaleX(-1)";
+        } else {
+            isOpenButtons = false;
+            document.querySelector('.buttons').style.width = "0px";
+            document.getElementById('close-button').style.transform = "none";
+        }
     });
 
     reload.addEventListener('click', () => {
