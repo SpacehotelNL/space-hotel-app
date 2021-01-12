@@ -33,9 +33,11 @@ switch (process.platform) {
         pluginVersion = '32.0.0.207';
         break;
 }
-app.commandLine.appendSwitch("disable-renderer-backgrounding");
-app.commandLine.appendSwitch('high-dpi-support', "1");
-app.commandLine.appendSwitch('force-device-scale-factor', "1");
+if (process.platform === 'win32') {
+    app.commandLine.appendSwitch('high-dpi-support', '1')
+    app.commandLine.appendSwitch('force-device-scale-factor', '1')
+}
+
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname.includes(".asar") ? process.resourcesPath : __dirname, "flash/" + pluginName));
 app.commandLine.appendSwitch('disable-site-isolation-trials');
 app.commandLine.appendSwitch('no-sandbox');
@@ -51,7 +53,9 @@ let createWindow = async () => {
         webPreferences: {
             plugins: true,
             nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: false,
+            webviewTag: true,
+            webSecurity: false
         },
         show: false,
         frame: true,
@@ -72,6 +76,7 @@ let createWindow = async () => {
         callback({ requestHeaders: details.requestHeaders })
     });
 
+    /*
     mainWindow.webContents.on("new-window", function (event, url) {
         if (url.indexOf("/hotel") === -1) {
             return;
@@ -80,6 +85,7 @@ let createWindow = async () => {
         event.preventDefault();
         mainWindow.webContents.executeJavaScript('enterHotel();');
     });
+    */
 
     mainWindow.webContents.on("new-window", function (event, url) {
         if (url.indexOf("/auth") === -1) {

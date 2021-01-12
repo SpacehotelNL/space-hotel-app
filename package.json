@@ -1,38 +1,23 @@
 {
   "name": "Space",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "main": "app.js",
-  "url": "https://spacehotel.co",
   "description": "Space Hotel: Maak vrienden, doe mee en val op!",
-  "homepage": "https://spacehotel.co",
-  "author": {
-    "name": "Space Studio",
-    "email": "support@spacehotel.be"
-  },
+  "author": "Space Studio",
   "scripts": {
     "start": "electron .",
-    "publish": "electron-builder --macos -win -p always",
+    "publish": "electron-builder --macos --win -p always",
     "build": "electron-builder --macos"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0",
     "electron": "11.1.0",
-    "electron-builder": "22.9.1",
-    "electron-notarize": "^1.0.0"
+    "electron-builder": "22.9.1"
   },
   "dependencies": {
     "electron-updater": "4.3.5"
   },
   "build": {
     "appId": "nl.space.app",
-    "files": "!build/SignHook.js",
-    "extraResources": [
-      "./flash/**"
-    ],
-    "directories": {
-      "buildResources": "resources",
-      "output": "release"
-    },
     "publish": [
       {
         "provider": "github",
@@ -40,16 +25,12 @@
         "repo": "space-hotel-app"
       }
     ],
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ]
+    "extraResources": [
+      "./flash/**"
+    ],
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
     },
     "nsis": {
       "installerIcon": "icon.ico",
@@ -59,30 +40,21 @@
       "perMachine": false,
       "artifactName": "Space-${version}.${ext}"
     },
-    "afterSign": "build/SignHook.js",
     "mac": {
-      "category": "public.games.social-networking",
-      "darkModeSupport": true,
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "build/entitlements-mac.plist",
-      "entitlementsInherit": "build/entitlements-mac.plist",
+      "category": "your.app.category.type",
       "target": [
+        "zip",
         "dmg"
       ]
     },
-    "dmg": {
-      "iconSize": 160,
-      "contents": [
+    "win": {
+      "target": [
         {
-          "x": 180,
-          "y": 170
-        },
-        {
-          "x": 480,
-          "y": 170,
-          "type": "link",
-          "path": "/Applications"
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         }
       ]
     },
