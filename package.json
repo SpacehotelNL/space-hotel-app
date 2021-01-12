@@ -1,13 +1,18 @@
 {
   "name": "Space",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "app.js",
   "description": "Space Hotel: Maak vrienden, doe mee en val op!",
-  "author": "Space Studio",
+  "homepage": "https://spacehotel.co",
+  "author": {
+    "name": "Space Studio",
+    "email": "support@spacehotel.be",
+    "url": "https://spacehotel.co"
+  },
   "scripts": {
     "start": "electron .",
     "publish": "electron-builder --macos --win -p always",
-    "build": "electron-builder --macos"
+    "build": "electron-builder --linux"
   },
   "devDependencies": {
     "electron": "11.1.0",
